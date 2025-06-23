@@ -1,0 +1,57 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-800 via-gray-900 to-black flex items-center justify-center px-4">
+  <div class="w-full max-w-2xl bg-slate-900 text-white rounded-3xl shadow-2xl p-8">
+    <h1 class="text-3xl font-bold text-center mb-6 text-indigo-400">🧬 Envía tu Código Java</h1>
+
+    <textarea [(ngModel)]="javaCode"
+              placeholder="Escribe tu código Java aquí..."
+              rows="10"
+              class="w-full p-4 text-base font-mono bg-slate-800 border border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 placeholder-gray-400 resize-y mb-4">
+    </textarea>
+
+    <button (click)="enviarCodigo()"
+            class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition flex justify-center items-center gap-2">
+      🚀 Enviar Código
+    </button>
+
+    <!-- Cargando respuesta de IA -->
+    <div *ngIf="cargando" class="text-indigo-400 text-sm mt-4 animate-pulse text-center">
+      ✨ La IA está analizando tu código...
+    </div>
+
+    <!-- Mensaje de validación -->
+    <div *ngIf="validationMessage"
+         class="mt-4 text-red-400 text-sm text-center font-medium">
+      {{ validationMessage }}
+    </div>
+
+    <!-- Icono de validación visual -->
+    <div *ngIf="responseFromAI && contieneCodigoJava(responseFromAI) && !cargando" class="flex justify-center mt-4">
+      <div *ngIf="esCodigoValido(responseFromAI)" class="flex items-center gap-2 text-green-400 font-semibold">
+        <span class="text-xl">✅</span> Código válido
+      </div>
+      <div *ngIf="!esCodigoValido(responseFromAI)" class="flex items-center gap-2 text-red-400 font-semibold">
+        <span class="text-xl">❌</span> Código con errores
+      </div>
+    </div>
+
+    <!-- Bloque de código sugerido por la IA -->
+    <div *ngIf="codigoExtraido && !cargando"
+         class="mt-4 bg-slate-800 border border-indigo-400 rounded-xl p-4 text-sm shadow-inner overflow-auto relative">
+      <h3 class="text-indigo-300 font-semibold mb-2 flex items-center gap-2">
+        <span>🔧 Código sugerido por la IA:</span>
+        <button (click)="copiarCodigo()"
+                class="ml-auto text-xs bg-indigo-600 hover:bg-indigo-700 text-white py-1 px-3 rounded transition">
+          📋 Copiar
+        </button>
+      </h3>
+      <pre><code [highlight]="codigoExtraido" language="java" class="font-mono"></code></pre>
+    </div>
+
+    <!-- Explicación de la IA -->
+    <div *ngIf="explicacionIA && !cargando"
+         class="mt-4 bg-slate-800 border border-indigo-400 rounded-xl p-4 text-sm shadow-inner">
+      <h3 class="text-indigo-300 font-semibold mb-2">💡 Respuesta de la IA:</h3>
+      <p class="whitespace-pre-wrap text-gray-100">{{ explicacionIA }}</p>
+    </div>
+  </div>
+</div>

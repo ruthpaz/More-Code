@@ -22,9 +22,15 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/pdfjs-dist/build/",
+                "output": "/assets/pdfjs/"
+              }
             ],
             "styles": [
+              "node_modules/highlight.js/styles/atom-one-dark.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -81,7 +87,12 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/pdfjs-dist/build/",
+                "output": "/assets/pdfjs/"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -91,5 +102,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d71f7400-558c-4565-9db7-f229ede3e9a0"
   }
 }

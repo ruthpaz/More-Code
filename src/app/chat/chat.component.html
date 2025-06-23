@@ -1,0 +1,40 @@
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 text-white rounded-3xl shadow-2xl">
+  <h2 class="text-3xl font-bold text-center mb-6">🧠 Generar Cuestionario desde PDF</h2>
+
+  <label class="block mb-2 font-semibold">Selecciona un archivo PDF:</label>
+  <input id="file" type="file"
+         class="block w-full px-4 py-2 border border-white/30 rounded-lg shadow-sm bg-white text-slate-800 focus:ring-2 focus:ring-white focus:outline-none"
+         (change)="onFileSelected($event)" accept=".pdf" required>
+
+  <label class="block mt-6 mb-2 font-semibold">Tipo de cuestionario:</label>
+  <select [(ngModel)]="tipoCuestionario"
+          class="block w-full px-4 py-2 border border-white/30 rounded-lg shadow-sm bg-white text-slate-800 focus:ring-2 focus:ring-white focus:outline-none">
+    <option value="opcion-multiple">Opción múltiple (A, B, C, D)</option>
+    <option value="verdadero-falso">Verdadero o Falso</option>
+    <option value="respuestas-simples">Solo respuestas</option>
+  </select>
+
+  <label class="block mt-6 mb-2 font-semibold">Visualizar con:</label>
+  <select [(ngModel)]="visualizarCuestionario"
+          class="block w-full px-4 py-2 border border-white/30 rounded-lg shadow-sm bg-white text-slate-800 focus:ring-2 focus:ring-white focus:outline-none">
+    <option value="sinrespuesta-incluida">Sin respuesta incluida</option>
+    <option value="respuesta-incluida">Respuesta incluida</option>
+  </select>
+
+  <button (click)="generarCuestionario()"
+          class="mt-8 w-full py-3 text-lg font-bold text-indigo-700 bg-white rounded-lg shadow-md hover:bg-indigo-100 transition">
+    🎯 Generar Cuestionario
+  </button>
+
+  <hr class="my-8 border-white/30">
+
+  <div id="cuestionario" *ngFor="let msg of messages"
+       class="bg-white border border-slate-300 rounded-lg p-4 mb-4 shadow-sm text-slate-800">
+    <pre class="whitespace-pre-wrap">{{ msg.text }}</pre>
+  </div>
+
+  <button (click)="imprimirCuestionario()"
+          class="w-full py-2 text-base font-semibold text-indigo-700 bg-white hover:bg-indigo-100 rounded-lg transition">
+    🖨️ Imprimir Cuestionario
+  </button>
+</div>
