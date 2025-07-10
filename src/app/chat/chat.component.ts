@@ -96,8 +96,8 @@ export class ChatComponent implements OnInit {
       prompt = `Genera un cuestionario de solo preguntas con incisos (A, B, C, D) a partir de los siguientes apuntes:\n\n${texto}`;
     } else if (this.tipoCuestionario === 'verdadero-falso') {
       prompt = `Genera un cuestionario con preguntas de tipo Verdadero o Falso a partir de los siguientes apuntes:\n\n${texto}`;
-    } else if (this.tipoCuestionario === 'respuestas-simples') {
-      prompt = `Extrae una lista de preguntas con sus respuestas basadas en los siguientes apuntes, sin incisos ni opciones múltiples:\n\n${texto}`;
+    } else if (this.tipoCuestionario === 'preguntas-simples') {
+      prompt = `Extrae una lista de preguntas simples basadas en los siguientes apuntes, sin incisos ni opciones múltiples:\n\n${texto}`;
     }
 
     if (this.visualizarCuestionario === 'respuesta-incluida') {
@@ -123,6 +123,9 @@ export class ChatComponent implements OnInit {
     });
   }
 
+
+
+  
   imprimirCuestionario() {
     const printContent = document.getElementById('cuestionario');
     const WindowPrt = window.open('', '', 'width=800,height=600');
